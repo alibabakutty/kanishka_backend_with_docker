@@ -37,12 +37,8 @@ public class SecurityConfig {
                         session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                 )
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**", "/oauth2/**", "/login/oauth2/**").permitAll() // FIX: Standardize path
-                        .anyRequest().authenticated()
-                )
-                        .oauth2Login(oauth2 -> oauth2
-                                .defaultSuccessUrl("/api/auth/oauth2-success", true)
-                        );
+                        .anyRequest().permitAll()
+                );
 
         // FIX: Add filters in logical order
         http.addFilterBefore(rateLimitFilter, UsernamePasswordAuthenticationFilter.class);

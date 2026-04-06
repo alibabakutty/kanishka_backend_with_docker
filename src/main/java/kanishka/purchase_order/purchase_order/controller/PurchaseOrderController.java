@@ -1,7 +1,9 @@
 package kanishka.purchase_order.purchase_order.controller;
 
+import kanishka.purchase_order.purchase_order.converter.PurchaseOrderConverter;
 import kanishka.purchase_order.purchase_order.dto.PurchaseOrderRequest;
 import kanishka.purchase_order.purchase_order.dto.PurchaseOrderResponse;
+import kanishka.purchase_order.purchase_order.dto.PurchaseOrderWrapper;
 import kanishka.purchase_order.purchase_order.service.PurchaseOrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,12 +16,33 @@ import java.util.List;
 public class PurchaseOrderController {
 
     private final PurchaseOrderService service;
+    private final PurchaseOrderConverter converter;
+
+//    @PostMapping
+//    public ResponseEntity<PurchaseOrderResponse> create(@RequestBody PurchaseOrderRequest request) {
+//        PurchaseOrderResponse response = service.create(request);
+//        return ResponseEntity.status(201).body(response);
+//    }
+
+//    @PostMapping
+//    public ResponseEntity<String> create(@RequestBody String request) {
+//        System.out.println(request);
+//        return ResponseEntity.ok("Success");
+//    }
+
 
     @PostMapping
-    public ResponseEntity<PurchaseOrderResponse> create(@RequestBody PurchaseOrderRequest request) {
-        PurchaseOrderResponse response = service.create(request);
-        return ResponseEntity.status(201).body(response);
+    public PurchaseOrderResponse createTally(@RequestBody PurchaseOrderWrapper wrapper) {
+        System.out.println(wrapper);
+        PurchaseOrderRequest request = converter.fromTallyJson(wrapper);
+        return service.create(request);
     }
+
+//    @PostMapping
+//    public PurchaseOrderResponse createTally(@RequestBody String rawJson) {
+//        System.out.println(rawJson);
+//        return null;
+//    }
 
     @GetMapping("/{id}")
     public ResponseEntity<PurchaseOrderResponse> getById(@PathVariable Long id){

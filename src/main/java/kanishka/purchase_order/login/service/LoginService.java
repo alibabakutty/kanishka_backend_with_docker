@@ -11,8 +11,6 @@ public interface LoginService {
 
     ResponseEntity<Map<String, String>> register(LoginDTO loginDTO);
 
-    String processOAuth2UserAndGetToken(String email, String name);
-
     ResponseEntity<UserProfileDTO> getCurrentUser(String username);
 
     ResponseEntity<Map<String, String>> logout();

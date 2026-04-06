@@ -10,7 +10,7 @@ public record PurchaseOrderResponse(
         LocalDate voucherDate,
         String voucherNumber,
         String partyLedgerName,
-        String orderNumber,
+        String orderNo,
         BigDecimal totalAmount,
         List<PurchaseOrderSubFormResponse> inventoryEntries
 ) {

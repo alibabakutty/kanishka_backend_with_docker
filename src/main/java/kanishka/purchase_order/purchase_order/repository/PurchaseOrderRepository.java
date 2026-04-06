@@ -9,7 +9,7 @@ import java.util.List;
 public interface PurchaseOrderRepository extends JpaRepository<PurchaseOrderEntity, Long> {
 
     // find all
-    List<PurchaseOrderEntity>findByOrderNumber(String orderNumber);
+    List<PurchaseOrderEntity> findByOrderNo(String orderNo);
     // check if order number exists
-    boolean existsByOrderNumber(String orderNumber);
+    boolean existsByOrderNo(String orderNo);
 }

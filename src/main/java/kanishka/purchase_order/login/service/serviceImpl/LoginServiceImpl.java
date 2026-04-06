@@ -82,24 +82,6 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public String processOAuth2UserAndGetToken(String email, String name) {
-        // check if user exists by email
-        LoginModule user = loginRepository.findByEmail(email)
-                .orElseGet(() -> {
-                    // if not found create a new user
-                    LoginModule newUser = new LoginModule();
-                    newUser.setUsername(email);
-                    newUser.setEmail(email);
-                    newUser.setRole("USER");
-                    // set a random password they will never use
-                    newUser.setPassword(passwordEncoder.encode("OAUTH2_USER_" + java.util.UUID.randomUUID()));
-                    return loginRepository.save(newUser);
-                });
-        // generate and return the token value
-        return jwtUtils.generateJwtCookie(user.getUsername()).getValue();
-    }
-
-    @Override
     public ResponseEntity<UserProfileDTO> getCurrentUser(String username) {
         LoginModule user = loginRepository.findByUsername(username)
                 .orElseThrow(() -> new UserNotFoundException("User not found: " + username));

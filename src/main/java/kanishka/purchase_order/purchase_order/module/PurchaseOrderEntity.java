@@ -43,7 +43,7 @@ public class PurchaseOrderEntity {
 
     @NotBlank(message = "Order number is required")
     @Column(name = "order_number", nullable = false)
-    private String orderNumber;
+    private String orderNo;
 
     @Column(name = "total_amount", precision = 19, scale = 2)
     private BigDecimal totalAmount;
