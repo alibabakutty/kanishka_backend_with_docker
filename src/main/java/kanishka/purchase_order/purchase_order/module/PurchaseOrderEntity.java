@@ -16,7 +16,9 @@ import java.util.List;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "purchase_order")
+@Table(name = "purchase_order", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "voucher_number")
+})
 @EntityListeners(AuditingEntityListener.class)
 public class PurchaseOrderEntity {
 

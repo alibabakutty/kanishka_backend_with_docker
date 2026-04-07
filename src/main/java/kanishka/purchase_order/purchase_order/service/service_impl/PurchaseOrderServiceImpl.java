@@ -9,7 +9,6 @@ import kanishka.purchase_order.purchase_order.repository.PurchaseOrderRepository
 import kanishka.purchase_order.purchase_order.service.PurchaseOrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
@@ -23,13 +22,39 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 
     @Override
     public PurchaseOrderResponse create(PurchaseOrderRequest request) {
-        PurchaseOrderEntity entity = mapper.toEntity(request);
-        // calculate total
-        entity.setTotalAmount(calculateTotal(entity.getInventoryEntries()));
+        // check if an order with this voucher number already exists
+        return repository.findByVoucherNumber(request.voucherNumber())
+                .map(existingEntity -> {
+                    // if exists
+                    mapper.updateEntityFromRequest(request, existingEntity);
+                    // clear and replace line items
+                    existingEntity.getInventoryEntries().clear();
+                    PurchaseOrderEntity tempEntity = mapper.toEntity(request);
 
-        PurchaseOrderEntity saved = repository.save(entity);
-
-        return mapper.toDto(saved);
+                    if (tempEntity.getInventoryEntries() != null) {
+                        tempEntity.getInventoryEntries().forEach(item -> item.setPurchaseOrder(existingEntity));
+                        existingEntity.getInventoryEntries().addAll(tempEntity.getInventoryEntries());
+                    }
+                    existingEntity.setTotalAmount(calculateTotal(existingEntity.getInventoryEntries()));
+                    return mapper.toDto(repository.save(existingEntity));
+                })
+                .orElseGet(() -> {
+                    // if it does not exists: create new
+                    PurchaseOrderEntity newEntity = mapper.toEntity(request);
+                    newEntity.setTotalAmount(calculateTotal(newEntity.getInventoryEntries()));
+                    // ensure back-reference for line items is set
+                    if (newEntity.getInventoryEntries() != null) {
+                        newEntity.getInventoryEntries().forEach(item -> item.setPurchaseOrder(newEntity));
+                    }
+                    return mapper.toDto(repository.save(newEntity));
+                });
+//        PurchaseOrderEntity entity = mapper.toEntity(request);
+//        // calculate total
+//        entity.setTotalAmount(calculateTotal(entity.getInventoryEntries()));
+//
+//        PurchaseOrderEntity saved = repository.save(entity);
+//
+//        return mapper.toDto(saved);
     }
 
     @Override
