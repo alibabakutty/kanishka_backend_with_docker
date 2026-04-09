@@ -15,7 +15,6 @@ public interface LoginMapper {
 
     // converts the database user to a login response if needed
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "lastLoginAt", ignore = true)
     @Mapping(target = "password", ignore = true)
     @Mapping(target = "role", defaultValue = "USER")

@@ -5,7 +5,6 @@ import kanishka.purchase_order.purchase_order.dto.PurchaseOrderSubFormRequest;
 import kanishka.purchase_order.purchase_order.dto.PurchaseOrderWrapper;
 import kanishka.purchase_order.purchase_order.dto.PurchaseOrderXmlDto;
 import org.springframework.stereotype.Component;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -34,6 +33,9 @@ public class PurchaseOrderConverter {
                 dto.partyLedgerName(),
                 dto.orderNo(),
                 dto.totalAmount(),
+                dto.createdBy(),
+                dto.approvedByTally(),
+                dto.approvedByTab(),
                 items
         );
     }
@@ -57,6 +59,9 @@ public class PurchaseOrderConverter {
                 xml.getPartyLedgerName(),
                 xml.getOrderNo(),
                 xml.getTotalAmount(),
+                xml.getCreatedBy(),
+                xml.getApprovedByTally(),
+                xml.getApprovedByTab(),
                 items
         );
     }

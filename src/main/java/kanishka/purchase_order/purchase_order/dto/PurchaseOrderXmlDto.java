@@ -5,7 +5,6 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import lombok.Data;
-
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -30,6 +29,15 @@ public class PurchaseOrderXmlDto {
 
     @JacksonXmlProperty(localName = "TotalAmount")
     private BigDecimal totalAmount;
+
+    @JacksonXmlProperty(localName = "PO Created By")
+    private String createdBy;
+
+    @JacksonXmlProperty(localName = "PO Approved By")
+    private String approvedByTally;
+
+    @JacksonXmlProperty(localName = "Approved By Tab")
+    private String approvedByTab;
 
     @JacksonXmlElementWrapper(localName = "InventoryEntries")
     @JacksonXmlProperty(localName = "Item")

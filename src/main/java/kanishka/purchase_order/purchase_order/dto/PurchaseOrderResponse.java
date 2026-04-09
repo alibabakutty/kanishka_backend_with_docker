@@ -12,6 +12,9 @@ public record PurchaseOrderResponse(
         String partyLedgerName,
         String orderNo,
         BigDecimal totalAmount,
+        String createdBy,
+        String approvedByTally,
+        String approvedByTab,
         List<PurchaseOrderSubFormResponse> inventoryEntries
 ) {
 }

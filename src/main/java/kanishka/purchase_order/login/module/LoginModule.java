@@ -38,8 +38,7 @@ public class LoginModule {
     @Column(nullable = false, length = 20)
     private String role = "USER";
 
-    @CreationTimestamp
-    @Column(updatable = false)
+    @Column(nullable = false)
     private LocalDateTime createdAt;
 
     private LocalDateTime lastLoginAt;

@@ -48,13 +48,6 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
                     }
                     return mapper.toDto(repository.save(newEntity));
                 });
-//        PurchaseOrderEntity entity = mapper.toEntity(request);
-//        // calculate total
-//        entity.setTotalAmount(calculateTotal(entity.getInventoryEntries()));
-//
-//        PurchaseOrderEntity saved = repository.save(entity);
-//
-//        return mapper.toDto(saved);
     }
 
     @Override
@@ -111,9 +104,11 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
             return BigDecimal.ZERO;
         }
 
-        return items.stream()
+        BigDecimal total = items.stream()
                 .map(PurchaseOrderSubFormEntity::getItemAmount)
                 .filter(Objects::nonNull)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
+        // return absolute which is positive value
+        return total.abs();
     }
 }

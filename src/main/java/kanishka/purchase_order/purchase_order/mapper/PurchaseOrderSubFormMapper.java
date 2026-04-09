@@ -5,7 +5,6 @@ import kanishka.purchase_order.purchase_order.dto.PurchaseOrderSubFormResponse;
 import kanishka.purchase_order.purchase_order.module.PurchaseOrderSubFormEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-
 import java.util.List;
 
 @Mapper(componentModel = "spring")
