@@ -1,7 +1,7 @@
 package kanishka.purchase_order.purchase_order.service;
 
-import kanishka.purchase_order.purchase_order.dto.PurchaseOrderRequest;
-import kanishka.purchase_order.purchase_order.dto.PurchaseOrderResponse;
+import kanishka.purchase_order.purchase_order.dto.api_side.PurchaseOrderRequest;
+import kanishka.purchase_order.purchase_order.dto.response_side.PurchaseOrderResponse;
 
 import java.util.List;
 

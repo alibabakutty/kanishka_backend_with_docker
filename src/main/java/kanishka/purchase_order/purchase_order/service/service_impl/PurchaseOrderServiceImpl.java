@@ -1,7 +1,7 @@
 package kanishka.purchase_order.purchase_order.service.service_impl;
 
-import kanishka.purchase_order.purchase_order.dto.PurchaseOrderRequest;
-import kanishka.purchase_order.purchase_order.dto.PurchaseOrderResponse;
+import kanishka.purchase_order.purchase_order.dto.api_side.PurchaseOrderRequest;
+import kanishka.purchase_order.purchase_order.dto.response_side.PurchaseOrderResponse;
 import kanishka.purchase_order.purchase_order.mapper.PurchaseOrderMapper;
 import kanishka.purchase_order.purchase_order.module.PurchaseOrderEntity;
 import kanishka.purchase_order.purchase_order.module.PurchaseOrderSubFormEntity;
@@ -39,7 +39,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
                     return mapper.toDto(repository.save(existingEntity));
                 })
                 .orElseGet(() -> {
-                    // if it does not exists: create new
+                    // if it does not exist: create new
                     PurchaseOrderEntity newEntity = mapper.toEntity(request);
                     newEntity.setTotalAmount(calculateTotal(newEntity.getInventoryEntries()));
                     // ensure back-reference for line items is set

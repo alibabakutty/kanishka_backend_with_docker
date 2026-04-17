@@ -1,0 +1,181 @@
+<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <style>
+        @page {
+            size: A4;
+            margin: 0.5cm; /* Smaller margins = wider content area */
+        }
+
+        body {
+          font-family: Arial, sans-serif;
+          font-size: 12px;
+          margin: 0;
+          padding: 0;
+        }
+
+        .container {
+          width: 100%; /* Changed from 800px to 100% for better PDF fitting */
+          margin: 10px auto;
+        }
+
+        table {
+          width: 100%;
+          border-collapse: collapse;
+          table-layout: fixed; /* Ensures table doesn't overflow PDF width */
+        }
+
+        td, th {
+          border: 1px solid black;
+          padding: 4px;
+          vertical-align: top;
+          word-wrap: break-word;
+        }
+
+        .no-border td {
+          border: none;
+        }
+
+        .center {
+          text-align: center;
+        }
+
+        .right {
+          text-align: right;
+        }
+
+        .bold {
+          font-weight: bold;
+        }
+
+        .small {
+          font-size: 11px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <table>
+        <tr>
+            <td style="width: 25%;">
+                <img th:src="@{classpath:static/logo.png}" alt="kanishka logo" width="100" height="100" />
+            </td>
+            <td class="center" style="width: 50%;">
+                <div class="bold">TAX INVOICE</div>
+                <div class="bold">Kanishka Construction Company</div>
+                <div class="small">
+                    OFFICE: Flat No.58, No.25/6 House of JAYAM VYBHAKAR, Nehru Street,<br/>
+                    Chennai - 600028<br/>
+                    GSTIN/UIN: 33AABCLT470K1Z4
+                </div>
+            </td>
+            <td class="right small" style="width: 25%;">
+                (ORIGINAL FOR RECIPIENT)
+            </td>
+        </tr>
+    </table>
+
+    <table>
+        <tr>
+            <td style="width: 50%;">
+                <b th:text="'Name & Address:'">Name & Address:</b><br/>
+                <span th:text="${customerName}">Acc Limited</span><br/>
+                <span th:text="${address}">Survey No.505/1...</span>
+            </td>
+            <td style="width: 50%;">
+                <b>Invoice No:</b> <span th:text="${invoiceNo}">POM-001</span><br/>
+                <b>Date:</b> <span th:text="${date}">21-4-2026</span><br/><br/>
+
+                <b>Site Address:</b><br/>
+                KANISHKA CIVIL ENGINEERING PRIVATE LIMITED<br/>
+                Flat No.2B, No.56 House of JAYAM VYBHAKAR,<br/>
+                Vinyam Road, Mandaveli, Chennai-600028
+            </td>
+        </tr>
+    </table>
+
+    <table>
+        <tr>
+            <td><b>GSTIN:</b> 33AAACT1507C1Z4</td>
+        </tr>
+    </table>
+
+    <table>
+        <thead>
+        <tr class="center bold">
+            <td style="width: 10%;">S.No</td>
+            <td style="width: 15%;">HSN/SAC</td>
+            <td style="width: 35%;">Description</td>
+            <td style="width: 10%;">Qty</td>
+            <td style="width: 10%;">Rate</td>
+            <td style="width: 10%;">Unit</td>
+            <td style="width: 10%;">Value</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item, iterStat : ${items}">
+            <td class="center" th:text="${iterStat.count}">1</td>
+            <td th:text="${item.hsn}">-</td>
+            <td th:text="${item.name}">GI Bend</td>
+            <td class="right" th:text="${item.qty}">10.00</td>
+            <td class="right" th:text="${#numbers.formatDecimal(item.rate, 1, 2)}">150.00</td>
+            <td class="center" th:text="${item.uom}">Nos</td>
+            <td class="right" th:text="${#numbers.formatDecimal(item.qty * item.rate, 1, 2)}">1500.00</td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="6" class="right bold">Total</td>
+            <td class="right bold" th:text="${#numbers.formatDecimal(total, 1, 2)}">25,742.03</td>
+        </tr>
+        </tfoot>
+    </table>
+
+    <table>
+        <tr>
+            <td>
+                <b>Amount in Words:</b><br/>
+                <span th:text="${totalInWords}">Twenty Five Thousand...</span>
+            </td>
+        </tr>
+    </table>
+
+    <table>
+        <tr>
+            <td colspan="2" class="center bold">Bank Details</td>
+        </tr>
+        <tr>
+            <td style="width: 30%;">
+                Bank Name:<br/>
+                A/c Name:<br/>
+                A/c No:<br/>
+                Branch:<br/>
+                IFSC:
+            </td>
+            <td style="width: 70%;"></td>
+        </tr>
+    </table>
+
+    <table>
+        <tr>
+            <td style="width: 50%;">
+                Receiver Signature<br/><br/>
+                Date:<br/>
+                Time:
+            </td>
+            <td class="right" style="width: 50%;">
+                For Demo Construction Company<br/><br/><br/>
+                Authorized Signatory
+            </td>
+        </tr>
+    </table>
+
+</div>
+
+</body>
+</html>

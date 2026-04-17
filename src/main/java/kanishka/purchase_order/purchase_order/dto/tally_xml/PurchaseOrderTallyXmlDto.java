@@ -1,4 +1,4 @@
-package kanishka.purchase_order.purchase_order.dto;
+package kanishka.purchase_order.purchase_order.dto.tally_xml;
 
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
@@ -10,7 +10,7 @@ import java.util.List;
 
 @Data
 @JacksonXmlRootElement(localName = "Voucher")
-public class PurchaseOrderXmlDto {
+public class PurchaseOrderTallyXmlDto {
 
     @JacksonXmlProperty(localName = "VoucherType")
     private String voucherType;
@@ -41,5 +41,5 @@ public class PurchaseOrderXmlDto {
 
     @JacksonXmlElementWrapper(localName = "InventoryEntries")
     @JacksonXmlProperty(localName = "Item")
-    private List<PurchaseOrderXmlItemDto> inventoryEntries;
+    private List<PurchaseOrderTallyXmlItemDto> inventoryEntries;
 }

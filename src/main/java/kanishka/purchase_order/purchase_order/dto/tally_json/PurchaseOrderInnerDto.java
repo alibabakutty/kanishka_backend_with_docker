@@ -1,6 +1,7 @@
-package kanishka.purchase_order.purchase_order.dto;
+package kanishka.purchase_order.purchase_order.dto.tally_json;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -26,4 +27,10 @@ public record PurchaseOrderInnerDto(
         @JsonAlias("Inventory Entries")
         List<PurchaseOrderItemRawDto> inventoryEntries
         ) {
+        // compact constructor to prevent null list errors
+        public PurchaseOrderInnerDto {
+                if (inventoryEntries == null) {
+                        inventoryEntries = java.util.Collections.emptyList();
+                }
+        }
 }

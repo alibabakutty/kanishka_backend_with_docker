@@ -1,4 +1,4 @@
-package kanishka.purchase_order.purchase_order.dto;
+package kanishka.purchase_order.purchase_order.dto.tally_json;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 

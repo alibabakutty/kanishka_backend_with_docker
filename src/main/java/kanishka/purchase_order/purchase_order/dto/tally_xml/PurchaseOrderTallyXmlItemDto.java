@@ -1,11 +1,11 @@
-package kanishka.purchase_order.purchase_order.dto;
+package kanishka.purchase_order.purchase_order.dto.tally_xml;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import lombok.Data;
 import java.math.BigDecimal;
 
 @Data
-public class PurchaseOrderXmlItemDto {
+public class PurchaseOrderTallyXmlItemDto {
 
     @JacksonXmlProperty(localName = "ItemName")
     private String itemName;

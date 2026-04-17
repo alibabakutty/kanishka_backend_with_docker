@@ -1,4 +1,4 @@
-package kanishka.purchase_order.purchase_order.dto;
+package kanishka.purchase_order.purchase_order.dto.api_side;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

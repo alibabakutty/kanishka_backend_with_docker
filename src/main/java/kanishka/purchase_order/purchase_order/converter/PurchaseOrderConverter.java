@@ -1,9 +1,9 @@
 package kanishka.purchase_order.purchase_order.converter;
 
-import kanishka.purchase_order.purchase_order.dto.PurchaseOrderRequest;
-import kanishka.purchase_order.purchase_order.dto.PurchaseOrderSubFormRequest;
-import kanishka.purchase_order.purchase_order.dto.PurchaseOrderWrapper;
-import kanishka.purchase_order.purchase_order.dto.PurchaseOrderXmlDto;
+import kanishka.purchase_order.purchase_order.dto.api_side.PurchaseOrderRequest;
+import kanishka.purchase_order.purchase_order.dto.api_side.PurchaseOrderSubFormRequest;
+import kanishka.purchase_order.purchase_order.dto.tally_json.PurchaseOrderWrapper;
+import kanishka.purchase_order.purchase_order.dto.tally_xml.PurchaseOrderTallyXmlDto;
 import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -43,7 +43,7 @@ public class PurchaseOrderConverter {
     }
 
     // xml -> main dto
-    public PurchaseOrderRequest fromXml(PurchaseOrderXmlDto xml) {
+    public PurchaseOrderRequest fromXml(PurchaseOrderTallyXmlDto xml) {
         List<PurchaseOrderSubFormRequest> items = xml.getInventoryEntries()
                 .stream()
                 .map(item -> new PurchaseOrderSubFormRequest(

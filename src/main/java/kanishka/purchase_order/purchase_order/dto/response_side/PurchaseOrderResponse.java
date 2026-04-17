@@ -1,4 +1,4 @@
-package kanishka.purchase_order.purchase_order.dto;
+package kanishka.purchase_order.purchase_order.dto.response_side;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

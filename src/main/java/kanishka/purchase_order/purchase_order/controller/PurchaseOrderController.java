@@ -1,9 +1,9 @@
 package kanishka.purchase_order.purchase_order.controller;
 
 import kanishka.purchase_order.purchase_order.converter.PurchaseOrderConverter;
-import kanishka.purchase_order.purchase_order.dto.PurchaseOrderRequest;
-import kanishka.purchase_order.purchase_order.dto.PurchaseOrderResponse;
-import kanishka.purchase_order.purchase_order.dto.PurchaseOrderWrapper;
+import kanishka.purchase_order.purchase_order.dto.api_side.PurchaseOrderRequest;
+import kanishka.purchase_order.purchase_order.dto.response_side.PurchaseOrderResponse;
+import kanishka.purchase_order.purchase_order.dto.tally_json.PurchaseOrderWrapper;
 import kanishka.purchase_order.purchase_order.service.PurchaseOrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -24,18 +24,35 @@ public class PurchaseOrderController {
 //        return ResponseEntity.status(201).body(response);
 //    }
 
-//    @PostMapping
+//    @PostMapping("/tally")
 //    public ResponseEntity<String> create(@RequestBody String request) {
 //        System.out.println(request);
 //        return ResponseEntity.ok("Success");
 //    }
 
 
-    @PostMapping
-    public PurchaseOrderResponse createTally(@RequestBody PurchaseOrderWrapper wrapper) {
-        System.out.println(wrapper);
+    // tally json
+    @PostMapping("/tally")
+    public ResponseEntity<PurchaseOrderResponse> createPurchaseOrderFromTally(
+            @RequestBody PurchaseOrderWrapper wrapper
+    ){
+        if (wrapper == null || wrapper.voucherDetails() == null) {
+            throw new RuntimeException("Invalid Tally JSON: Voucher Details missing");
+        }
+
         PurchaseOrderRequest request = converter.fromTallyJson(wrapper);
-        return service.create(request);
+
+        PurchaseOrderResponse response = service.create(request);
+
+        return ResponseEntity.status(201).body(response);
+    }
+
+    // Normal JSON (API Format)
+    @PostMapping
+    public ResponseEntity<PurchaseOrderResponse> createPurchaseOrder(@RequestBody PurchaseOrderRequest request) {
+        System.out.println("NORMAL API HIT ✅" + request);
+
+        return ResponseEntity.status(201).body(service.create(request));
     }
 
 //    @PostMapping
