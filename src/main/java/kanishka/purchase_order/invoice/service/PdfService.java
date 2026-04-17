@@ -22,6 +22,12 @@ public class PdfService {
 
         PdfRendererBuilder builder = new PdfRendererBuilder();
         builder.useFastMode(); // Optional: Makes generation faster
+
+        builder.useFont(() ->
+            getClass().getResourceAsStream("/fonts/NotoSans-Regular.ttf"),
+                "Noto Sans"
+        );
+
         builder.withHtmlContent(html, null);
         builder.toStream(out);
         builder.run();
