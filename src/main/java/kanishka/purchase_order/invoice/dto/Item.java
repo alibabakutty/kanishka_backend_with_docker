@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 
 @Data
 public class Item {
+    private String partNo;
     private String name;
     private String hsn;
     private BigDecimal gst;

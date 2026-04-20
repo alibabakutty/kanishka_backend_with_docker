@@ -55,13 +55,12 @@
         }
     </style>
 </head>
-
 <body>
-
+<div style="text-align: right; font-size: 11px; margin-bottom: 4px;">
+    (ORIGINAL FOR RECIPIENT)
+</div>
 <div class="container">
-
     <div style="display: table; width: 100%; border: 1px solid black;">
-
         <div style="display: table-row;">
 
             <!-- LEFT -->
@@ -70,7 +69,7 @@
             </div>
 
             <!-- CENTER -->
-            <div style="display: table-cell; width: 50%; padding: 4px; text-align: center; vertical-align: top;">
+            <div style="display: table-cell; width: 75%; padding: 4px; text-align: center; vertical-align: top;">
                 <div class="bold">Kanishka Construction Company</div>
                 <div class="small">
                     OFFICE: Flat No.58, No. 25/6 House of JAYAM VYBHAKAR, Nehru Street,<br/>
@@ -80,19 +79,15 @@
             </div>
 
             <!-- RIGHT -->
-            <div style="display: table-cell; width: 25%; padding: 4px; text-align: right; vertical-align: top;">
-                (ORIGINAL FOR RECIPIENT)
-            </div>
 
         </div>
-
     </div>
 
     <table>
         <tr>
             <td style="width: 50%;">
-                <div style="text-align: center;">
-                    <b th:text="'PURCHASE ORDER'">PURCHASE ORDER</b>
+                <div class="center">
+                    <b>PURCHASE ORDER</b>
                 </div>
                 <b th:text="${customerName}">Acc Limited</b><br/>
                 <span th:text="${address}">Survey No.505/1...</span><br/>
@@ -118,8 +113,10 @@
         <thead>
         <tr class="center bold">
             <td style="width: 8%;">S.No</td>
-            <td style="width: 12%;">HSN/SAC</td>
+            <td style="width: 12%;">Part No</td>
             <td style="width: 32%;">Description</td>
+            <td style="width: 12%;">HSN/SAC</td>
+            <td style="width: 12%;">GST</td>
             <td style="width: 10%;">Qty</td>
             <td style="width: 12%;">Rate</td>
             <td style="width: 10%;">Unit</td>
@@ -129,20 +126,30 @@
         <tbody>
         <tr th:each="item, iterStat : ${items}">
             <td class="center" th:text="${iterStat.count}">1</td>
-            <td th:text="${item.hsn}">-</td>
+            <td th:text="${item.partNo}">-</td>
             <td th:text="${item.name}">GI Bend</td>
+            <td th:text="${item.hsn}">-</td>
+            <td class="center" th:text="${item.gst + ' %'}">-</td>
             <td class="right" th:text="${#numbers.formatDecimal(item.qty, 1, 2)}">10.00</td>
             <td class="right" th:text="${item.formattedRate}">150.00</td>
             <td class="center" th:text="${item.uom}">Nos</td>
             <td class="right" th:text="${item.formattedAmount}">1500.00</td>
         </tr>
         <tr th:if="${spacerHeight > 0}">
-            <td colspan="7" th:style="'height:' + ${spacerHeight} + 'px;'"></td>
+            <td th:style="'height:' + ${spacerHeight} + 'px;'"></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
         </tr>
         </tbody>
         <tfoot>
         <tr>
-            <td colspan="6" class="right bold">Total</td>
+            <td colspan="8" class="right bold">Total</td>
             <td class="right bold" th:text="${formattedTotal}">25,742.03</td>
         </tr>
         </tfoot>
@@ -162,32 +169,30 @@
             <td colspan="2" class="center bold">Bank Details</td>
         </tr>
         <tr>
-            <td style="width: 30%;">
+            <td style="width: 30%; border-right: none;">
                 Bank Name:<br/>
                 A/c Name:<br/>
                 A/c No:<br/>
                 Branch:<br/>
                 IFSC:
             </td>
-            <td style="width: 70%;"></td>
+            <td style="width: 70%; border-left: none;"></td>
         </tr>
     </table>
 
     <table>
         <tr>
-            <td style="width: 50%;">
+            <td style="width: 50%; border-right: none;">
                 Receiver Signature<br/><br/>
                 Date:<br/>
                 Time:
             </td>
-            <td class="right" style="width: 50%;">
+            <td class="right" style="width: 50%; border-left: none;">
                 For Kanishka Construction Company<br/><br/><br/>
                 Authorized Signatory
             </td>
         </tr>
     </table>
-
 </div>
-
 </body>
 </html>
