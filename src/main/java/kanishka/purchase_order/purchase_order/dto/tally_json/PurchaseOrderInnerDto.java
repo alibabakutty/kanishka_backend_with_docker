@@ -24,6 +24,8 @@ public record PurchaseOrderInnerDto(
         String createdBy,
         @JsonAlias("PO Approved By")
         String approvedBy,
+        @JsonAlias("Company Name")
+        String companyName,
         @JsonAlias("Inventory Entries")
         List<PurchaseOrderItemRawDto> inventoryEntries
         ) {

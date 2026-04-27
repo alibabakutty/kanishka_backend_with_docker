@@ -10,10 +10,12 @@ public record PurchaseOrderSubFormRequest(
         String hsnCode,
         BigDecimal gstPercentage,
         String itemUom,
+        String companyName,
         @NotNull
         @PositiveOrZero
         BigDecimal billedQty,
         BigDecimal itemRate,
         BigDecimal itemAmount
+
 ) {
 }

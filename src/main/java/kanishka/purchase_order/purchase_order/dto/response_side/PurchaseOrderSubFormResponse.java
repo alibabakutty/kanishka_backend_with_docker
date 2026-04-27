@@ -10,6 +10,7 @@ public record PurchaseOrderSubFormResponse(
         String itemUom,
         BigDecimal billedQty,
         BigDecimal itemRate,
-        BigDecimal itemAmount
+        BigDecimal itemAmount,
+        String companyName
 ) {
 }

@@ -18,6 +18,8 @@ public record PurchaseOrderRequest(
         String narration,
         String createdBy,
         String approvedBy,
+        String companyName,
         List<PurchaseOrderSubFormRequest> inventoryEntries
 ) {
+
 }

@@ -24,6 +24,7 @@ public class PurchaseOrderBridgeMapper {
                 dto.narration(),
                 dto.createdBy(),
                 dto.approvedBy(),
+                dto.companyName(),
                 mapItems(dto.inventoryEntries())
         );
     }
@@ -36,6 +37,7 @@ public class PurchaseOrderBridgeMapper {
                 item.hsnCode(),
                 item.gstPercentage(),
                 item.itemUom(),
+                item.companyName(),
                 toBigDecimal(item.billedQty()),
                 toBigDecimal(item.itemRate()),
                 toBigDecimal(item.itemAmount())

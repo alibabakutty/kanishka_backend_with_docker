@@ -23,6 +23,7 @@ public class PurchaseOrderConverter {
                         item.hsnCode(),
                         item.gstPercentage(),
                         item.itemUom(),
+                        item.companyName(),
                         extractQty(item.billedQty()),
                         new BigDecimal(item.itemRate()),
                         new BigDecimal(item.itemAmount())
@@ -38,8 +39,9 @@ public class PurchaseOrderConverter {
                 dto.narration(),
                 dto.createdBy(),
                 dto.approvedBy(),
+                dto.companyName(),
                 items
-        );
+                );
     }
 
     // xml -> main dto
@@ -51,6 +53,7 @@ public class PurchaseOrderConverter {
                         item.getHsnCode(),
                         item.getGstPercentage(),
                         item.getItemUom(),
+                        item.getCompanyName(),
                         new BigDecimal(item.getBilledQty()),
                         new BigDecimal(item.getRate()),
                         new BigDecimal(item.getAmount())
@@ -66,8 +69,8 @@ public class PurchaseOrderConverter {
                 xml.getCreatedBy(),
                 xml.getApprovedBy(),
                 xml.getNarration(),
-                items
-        );
+                xml.getCompanyName(),
+                items);
     }
 
     private BigDecimal extractQty(String billedQty) {

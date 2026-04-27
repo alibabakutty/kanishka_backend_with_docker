@@ -35,10 +35,9 @@ public class LoginServiceImpl implements LoginService {
         validateLoginInput(loginDTO);
 
         LoginModule user = loginRepository.findByUsername(loginDTO.getUsername())
-                .orElseThrow(() -> new InvalidCredentialsException("Invalid username or password"));
-
-        if (!passwordEncoder.matches(loginDTO.getPassword(), user.getPassword())) {
-            throw new InvalidCredentialsException("Invalid username or password");
+                .orElseThrow(() -> new InvalidCredentialsException("Invalid username "));
+         if (!passwordEncoder.matches(loginDTO.getPassword(), user.getPassword())) {
+            throw new InvalidCredentialsException("Invalid password");
         }
 
         ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(user.getUsername());

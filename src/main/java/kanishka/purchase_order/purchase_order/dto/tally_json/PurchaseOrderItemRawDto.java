@@ -24,6 +24,9 @@ public record PurchaseOrderItemRawDto(
         String itemRate,
 
         @JsonAlias("Amount")
-        String itemAmount
+        String itemAmount,
+
+        @JsonAlias("Company Name")
+        String companyName
 ) {
 }

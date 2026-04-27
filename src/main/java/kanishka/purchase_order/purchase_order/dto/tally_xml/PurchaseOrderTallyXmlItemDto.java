@@ -7,6 +7,9 @@ import java.math.BigDecimal;
 @Data
 public class PurchaseOrderTallyXmlItemDto {
 
+    @JacksonXmlProperty(localName = "Company Name")
+    private String companyName;
+
     @JacksonXmlProperty(localName = "ItemName")
     private String itemName;
 
@@ -27,5 +30,6 @@ public class PurchaseOrderTallyXmlItemDto {
 
     @JacksonXmlProperty(localName = "Amount")
     private String amount;
+
 
 }

@@ -15,6 +15,7 @@ public record PurchaseOrderResponse(
         String narration,
         String createdBy,
         String approvedBy,
+        String companyName,
         List<PurchaseOrderSubFormResponse> inventoryEntries
 ) {
 }

@@ -1,6 +1,7 @@
 package kanishka.purchase_order.purchase_order.dto.tally_xml;
 
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
@@ -38,6 +39,9 @@ public class PurchaseOrderTallyXmlDto {
 
     @JacksonXmlProperty(localName = "PO Approved By")
     private String approvedBy;
+
+    @JacksonXmlProperty(localName = "Company Name")
+    String companyName;
 
     @JacksonXmlElementWrapper(localName = "InventoryEntries")
     @JacksonXmlProperty(localName = "Item")

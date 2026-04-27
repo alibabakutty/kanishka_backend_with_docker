@@ -8,7 +8,10 @@ import kanishka.purchase_order.purchase_order.service.PurchaseOrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.sql.SQLOutput;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("api/v1/purchase-orders")
@@ -36,14 +39,13 @@ public class PurchaseOrderController {
     public ResponseEntity<PurchaseOrderResponse> createPurchaseOrderFromTally(
             @RequestBody PurchaseOrderWrapper wrapper
     ){
+
         if (wrapper == null || wrapper.voucherDetails() == null) {
             throw new RuntimeException("Invalid Tally JSON: Voucher Details missing");
         }
-
         PurchaseOrderRequest request = converter.fromTallyJson(wrapper);
-
+        System.out.println(request.toString());
         PurchaseOrderResponse response = service.create(request);
-
         return ResponseEntity.status(201).body(response);
     }
 
@@ -51,7 +53,6 @@ public class PurchaseOrderController {
     @PostMapping
     public ResponseEntity<PurchaseOrderResponse> createPurchaseOrder(@RequestBody PurchaseOrderRequest request) {
         System.out.println("NORMAL API HIT ✅" + request);
-
         return ResponseEntity.status(201).body(service.create(request));
     }
 
@@ -66,9 +67,24 @@ public class PurchaseOrderController {
         return ResponseEntity.ok(service.getById(id));
     }
 
-    @GetMapping
+    @GetMapping("/allpo")
+    public ResponseEntity<List<PurchaseOrderResponse>> getAllPurchaseOrders() {
+        return ResponseEntity.ok(service.getpo());
+    }
+
+    @GetMapping("/generalpo")
     public ResponseEntity<List<PurchaseOrderResponse>> getAll() {
-        return ResponseEntity.ok(service.getAll());
+        return ResponseEntity.ok(service.generalpo());
+    }
+
+    @GetMapping("/materialpo")
+    public ResponseEntity<List<PurchaseOrderResponse>> materialpo() {
+        return ResponseEntity.ok(service.materialpo());
+    }
+
+    @GetMapping("/labourpo")
+    public ResponseEntity<List<PurchaseOrderResponse>> labourpo() {
+        return ResponseEntity.ok(service.labourpo());
     }
 
     @PutMapping("/{id}")
@@ -81,4 +97,6 @@ public class PurchaseOrderController {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
+
+
 }

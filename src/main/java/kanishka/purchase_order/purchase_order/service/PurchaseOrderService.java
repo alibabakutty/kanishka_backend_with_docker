@@ -10,7 +10,13 @@ public interface PurchaseOrderService {
 
     PurchaseOrderResponse getById(Long id);
 
-    List<PurchaseOrderResponse> getAll();
+    List<PurchaseOrderResponse> getpo();
+
+    List<PurchaseOrderResponse> generalpo();
+
+    List<PurchaseOrderResponse> materialpo();
+
+    List<PurchaseOrderResponse> labourpo();
 
     PurchaseOrderResponse update(Long id, PurchaseOrderRequest request);
 
